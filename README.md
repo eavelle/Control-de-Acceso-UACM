@@ -48,7 +48,7 @@ Este repositorio reúne los documentos y recursos del proyecto, organizados por 
 - [Especificación de requisitos de software (SRS)](SRS_Sistema_Control_Acceso_UACM_v1.0.pdf)
 - [Diagrama de Gantt](Diagrama_Gantt.xlsx)
 
-## 🖥️ Implementación
+## Implementación
 
 La carpeta [`Implementacion del software/`](Implementacion%20del%20software/) contiene el proyecto de implementación y sus recursos asociados, entre ellos:
 

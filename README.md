@@ -45,14 +45,5 @@ Para consultar las instrucciones específicas de ejecución, revisa el README y 
 
 Los nombres y las rutas originales de los archivos del proyecto se conservaron para evitar afectar referencias internas. Los archivos generados durante la compilación (`target/`) están excluidos del seguimiento de Git mediante `.gitignore`; se generan nuevamente al compilar el proyecto.
 
-## ⚠️ Antes de publicar
-
-Si este repositorio será público, revisa primero las credenciales de demostración y los valores predeterminados de configuración incluidos en la documentación y los archivos de configuración. No publiques contraseñas reales, tokens ni datos personales.
-
----
-
-<div align="center">
-
-**Universidad Autónoma de la Ciudad de México (UACM)**
 
 </div>

@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: control-acceso-uacm
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/control_acceso_uacm?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Mexico_City&characterEncoding=UTF-8}
+    username: ${DB_USER:uacm}
+    password: ${DB_PASSWORD:uacm123}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: America/Mexico_City
+  thymeleaf:
+    cache: false
+
+server:
+  port: ${PORT:8080}
+  servlet:
+    session:
+      timeout: 15m
+  error:
+    whitelabel:
+      enabled: false
+
+app:
+  seed:
+    enabled: ${APP_SEED:true}
+  seguridad:
+    max-intentos: 5
+
+logging:
+  level:
+    mx.uacm.controlacceso: INFO

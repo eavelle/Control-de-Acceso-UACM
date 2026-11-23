@@ -1,0 +1,213 @@
+:root {
+    /* Color institucional: rojo UACM */
+    --uacm-rojo: #8b0000;
+    --uacm-rojo-claro: #a50000;
+    --uacm-blanco: #ffffff;
+    --uacm-texto-oscuro: #212529;
+}
+
+body {
+    font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    color: var(--uacm-texto-oscuro);
+    background: var(--uacm-blanco);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* Fondo del plantel en todas las páginas */
+body.bg-plantel {
+    background-image: url('/img/plantel-uacm.jpg');
+}
+
+/* Overlay sutil para que el contenido sea legible sobre el fondo de la imagen */
+.body-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.82);
+    z-index: -1;
+}
+
+.bg-uacm {
+    background-color: var(--uacm-rojo) !important;
+}
+
+.text-uacm {
+    color: var(--uacm-rojo) !important;
+}
+
+.btn-uacm {
+    background-color: var(--uacm-rojo);
+    border-color: var(--uacm-rojo);
+    color: #fff;
+}
+
+.btn-uacm:hover,
+.btn-uacm:focus {
+    background-color: var(--uacm-rojo-claro);
+    border-color: var(--uacm-rojo-claro);
+    color: #fff;
+}
+
+.btn-outline-uacm {
+    border-color: var(--uacm-rojo);
+    color: var(--uacm-rojo);
+}
+
+.btn-outline-uacm:hover,
+.btn-outline-uacm:focus {
+    background-color: var(--uacm-rojo);
+    border-color: var(--uacm-rojo);
+    color: #fff;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: .2px;
+    color: var(--uacm-blanco) !important;
+}
+
+.card {
+    border: 0;
+    border-radius: .75rem;
+    box-shadow: 0 2px 12px rgba(139, 0, 0, .08);
+    background: rgba(255, 255, 255, 0.92);
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, .06);
+}
+
+.table > :not(caption) > * > * {
+    padding: .75rem .75rem;
+}
+
+.avatar-iniciales {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #f8f9fa;
+    color: var(--uacm-rojo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid var(--uacm-rojo);
+}
+
+.identidad-foto {
+    width: 180px;
+    height: 220px;
+    border-radius: .75rem;
+    background: #f8f9fa;
+    color: var(--uacm-rojo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    font-weight: 700;
+    overflow: hidden;
+    border: 3px solid var(--uacm-rojo);
+    box-shadow: 0 4px 18px rgba(139, 0, 0, .18);
+}
+
+.identidad-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Logotipo institucional UACM */
+.logo-uacm {
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .35));
+}
+
+.logo-navbar {
+    height: 42px;
+    width: auto;
+    filter: brightness(1.1);
+}
+
+/* Contenedor del logo en login (fondo oscuro para logo claro) */
+.login-logo-container {
+    background: var(--uacm-rojo);
+    border-radius: 50%;
+    padding: 14px;
+    display: inline-block;
+    box-shadow: 0 8px 24px rgba(139, 0, 0, .4);
+}
+
+.login-logo-container img {
+    width: 150px;
+    height: auto;
+    filter: brightness(1.2) contrast(1.1);
+}
+
+.dropdown-item-text {
+    cursor: default;
+}
+
+code {
+    color: var(--uacm-rojo);
+}
+
+.badge {
+    font-weight: 600;
+}
+
+.alert-danger {
+    background-color: rgba(139, 0, 0, .12);
+    border-color: var(--uacm-rojo);
+    color: #6d0000;
+}
+
+.alert-success {
+    background-color: rgba(0, 128, 0, .12);
+    border-color: #006400;
+    color: #004d00;
+}
+
+.alert-warning {
+    background-color: rgba(255, 140, 0, .12);
+    border-color: #ff8c00;
+    color: #8a5a00;
+}
+
+@media (max-width: 576px) {
+    .display-6 {
+        font-size: 2rem;
+    }
+}
+
+/* Asegurar que el contenedor principal tenga fondo semitransparente sobre la imagen */
+main.container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, .08);
+}
+
+/* Tabla con fondo suave */
+.table {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+/* Botón de permitir con advertencia destacado */
+.btn-danger {
+    background-color: var(--uacm-rojo);
+    border-color: var(--uacm-rojo);
+}
+
+.btn-danger:hover {
+    background-color: var(--uacm-rojo-claro);
+    border-color: var(--uacm-rojo-claro);
+}

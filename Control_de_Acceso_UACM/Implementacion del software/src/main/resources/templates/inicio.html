@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragmentos/comunes :: head('Inicio')}"></head>
+<body class="bg-plantel">
+<div th:replace="~{fragmentos/comunes :: nav}"></div>
+
+<main class="container py-4">
+    <div th:replace="~{fragmentos/comunes :: alertas}"></div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+        <div>
+            <h1 class="h3 mb-1">Hola, <span th:text="${principal.nombre}">Usuario</span></h1>
+            <p class="text-muted mb-0">
+                <span class="badge bg-secondary" th:text="${principal.rol.descripcion}">Rol</span>
+                · Panel de la Etapa 1: seguridad, accesos institucionales y bitácora.
+            </p>
+        </div>
+        <div class="d-flex gap-2">
+            <a th:if="${esGuardia}" class="btn btn-uacm" th:href="@{/guardia}">
+                <i class="bi bi-upc-scan"></i> Revisar identidad
+            </a>
+            <a th:if="${esDireccion}" class="btn btn-outline-uacm" th:href="@{/admin/usuarios}">
+                <i class="bi bi-people"></i> Gestionar usuarios
+            </a>
+            <a th:if="${esDireccion or esGuardia}" class="btn btn-outline-secondary" th:href="@{/bitacora}">
+                <i class="bi bi-journal-text"></i> Bitácora
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card h-100 border-start border-success border-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <p class="text-muted mb-1">Accesos permitidos hoy</p>
+                            <h2 class="display-6 mb-0" th:text="${permitidosHoy}">0</h2>
+                        </div>
+                        <i class="bi bi-check-circle-fill fs-2 text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-start border-danger border-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <p class="text-muted mb-1">Accesos denegados hoy</p>
+                            <h2 class="display-6 mb-0" th:text="${denegadosHoy}">0</h2>
+                        </div>
+                        <i class="bi bi-x-circle-fill fs-2 text-danger"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-start border-warning border-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <p class="text-muted mb-1">Cuentas bloqueadas</p>
+                            <h2 class="display-6 mb-0" th:text="${cuentasBloqueadas}">0</h2>
+                        </div>
+                        <i class="bi bi-lock-fill fs-2 text-warning"></i>
+                    </div>
+                    <a th:if="${esDireccion}" class="small text-decoration-none"
+                       th:href="@{/admin/usuarios}">Revisar cuentas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${esEmisor}" class="alert alert-info">
+        <i class="bi bi-info-circle"></i>
+        El módulo de tarjetones vehiculares corresponde a la Etapa 3. Por ahora tu cuenta está creada y con el rol asignado.
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <span class="fw-semibold"><i class="bi bi-clock-history"></i> Últimos accesos registrados</span>
+            <a th:if="${esDireccion}" class="small text-decoration-none" th:href="@{/bitacora}">Ver bitácora completa</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                <tr>
+                    <th>Fecha y hora</th>
+                    <th>Persona</th>
+                    <th>Matrícula / código</th>
+                    <th>Método</th>
+                    <th>Punto</th>
+                    <th>Resultado</th>
+                    <th>Guardia</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(accesosRecientes)}">
+                    <td colspan="7" class="text-center text-muted py-4">Todavía no hay accesos registrados.</td>
+                </tr>
+                <tr th:each="acceso : ${accesosRecientes}">
+                    <td th:text="${#temporals.format(acceso.fechaHora, 'dd/MM/yyyy HH:mm')}">01/01/2026 08:00</td>
+                    <td>
+                        <span th:if="${acceso.usuario != null}" th:text="${acceso.usuario.nombreCompleto}">Nombre</span>
+                        <span th:if="${acceso.usuario == null}" class="text-muted">No identificado</span>
+                    </td>
+                    <td>
+                        <span th:if="${acceso.usuario != null}" th:text="${acceso.usuario.matricula}">20260001</span>
+                        <span th:if="${acceso.usuario == null}" th:text="${acceso.codigoIngresado}">—</span>
+                    </td>
+                    <td th:text="${acceso.metodo.descripcion}">QR</td>
+                    <td th:text="${acceso.puntoAcceso}">Acceso principal</td>
+                    <td>
+                        <span class="badge"
+                              th:classappend="${acceso.resultado.name() == 'PERMITIDO' ? 'bg-success' : 'bg-danger'}"
+                              th:text="${acceso.resultado.descripcion}">Permitido</span>
+                    </td>
+                    <td th:text="${acceso.guardia.nombre}">Guardia</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{fragmentos/comunes :: footer}"></div>
+</body>
+</html>
+

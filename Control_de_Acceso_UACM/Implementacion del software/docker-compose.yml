@@ -1,0 +1,32 @@
+services:
+  mariadb:
+    image: mariadb:11.4
+    container_name: uacm-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: control_acceso_uacm
+      MARIADB_USER: uacm
+      MARIADB_PASSWORD: uacm123
+    ports:
+      - "3306:3306"
+    volumes:
+      - uacm_mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  adminer:
+    image: adminer:latest
+    container_name: uacm-adminer
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+volumes:
+  uacm_mariadb_data:
